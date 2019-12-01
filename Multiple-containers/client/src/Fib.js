@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function Fib() {
@@ -18,7 +18,7 @@ export default function Fib() {
 
   const renderSeenIndexes = () => seenIndexes.map(({ number }) => number).join(', ')
 
-  renderValues = () => {
+  const renderValues = () => {
     const entries = []
     for (let key in values) {
       entries.push(
@@ -30,14 +30,13 @@ export default function Fib() {
     return entries
   }
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     await axios.post('/api/values', {
       index
     })
     setIndex('')
-    return entries;
   }
 
   useEffect(() => {
